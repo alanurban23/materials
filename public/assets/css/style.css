@@ -1,0 +1,18 @@
+#material-list {
+    margin-left: 20%;
+}
+.group {
+    font-weight: 600;
+    cursor: pointer;
+}
+.material {
+    cursor: default;
+    font-weight: normal;
+}
+
+#material-list {
+    cursor: default;
+}
+.list-group-item em {
+    float: right;
+}

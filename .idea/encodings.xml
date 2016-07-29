@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/MaterialController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/MaterialGroupController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/MeasureController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/seeds/MaterialGroupSeeder.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/seeds/MaterialSeeder.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/database/seeds/MeasuresSeeder.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/home.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/modals.blade.php" charset="UTF-8" />
+    <file url="PROJECT" charset="ISO-8859-1" />
+  </component>
+</project>
