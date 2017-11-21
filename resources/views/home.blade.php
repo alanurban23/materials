@@ -18,6 +18,12 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="assets/js/app.js"></script>
+
+    <style>
+        ul>li {
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -84,8 +90,10 @@
                                 </small>
                             </h4>
                             <p class="list-group-item-text">
-                                <italic id="{!! $material->group->id !!}">{!! $material->group->name !!}</italic>
-                                <em>{!! $material->code !!}</em>
+                                @if(isset($material->group))
+                                    <italic id="{!! $material->group->id !!}">{!! $material->group->name !!}</italic>
+                                @endif
+                                    <em>{!! $material->code !!}</em>
                             </p>
                         </a>
                     @endforeach
@@ -98,12 +106,13 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Grupy mteriałów
                         <a href="" data-toggle="modal" data-target="#modal-new-material-groups">
-                            <span class="glyphicon glyphicon-plus" style="float: right;"></span>
+                            <span class="glyphicon glyphicon-plus" style="float: right;" title="Dodaj grupę"></span>
                         </a>
+                        <span class="glyphicon glyphicon-resize-full" style="float: right; margin-right: 10px; cursor:pointer;" title="Rozwiń wszystko"></span>
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div id="group-list">
+                    <div id="group-list" class="roll-in">
                         @foreach($groups as $el)
                             {!! $el !!}
                         @endforeach

@@ -47,18 +47,28 @@ class MaterialController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function update(Request $request, $code)
+    public function action(Request $request, $code)
     {
+        $materialID = Material::where('code', Input::get('code'))->pluck('id')->first();
 
-        Material::where('code', $code)
-            ->update([
-                'code' => Input::get('code'),
-                'name' => Input::get('name'),
-                'measures_id' => Input::get('measure'),
-                'material_groups_id' => Input::get('group'),
-            ]);
+        if (Input::get('save')) {
+            Material::where('code', $code)
+                ->update([
+                    'code' => Input::get('code'),
+                    'name' => Input::get('name'),
+                    'measures_id' => Input::get('measure'),
+                    'material_groups_id' => Input::get('group'),
+                ]);
 
-        Session::flash('message', 'Zaaktualizowano materiał o kodzie '.$code);
-        return redirect('/');
+            Session::flash('message', 'Zaaktualizowano materiał o kodzie '.$code);
+            return redirect('/');
+        }
+        elseif (Input::get('destroy')) {
+            Material::destroy($materialID);
+
+            Session::flash('message', 'Usunięto liść');
+            return redirect('/');
+        }
+
     }
 }

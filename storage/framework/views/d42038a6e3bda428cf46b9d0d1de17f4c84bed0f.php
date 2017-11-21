@@ -263,8 +263,14 @@
                 </div>
 
                 <div class="form-group">
+
                     <div class="col-sm-8 col-lg-offset-2">
-                        <?php echo Form::submit('Zapisz', array('class' => 'btn btn-primary', 'name' => 'save')); ?>
+                        <div class="btn-group">
+                            <?php echo Form::submit('Zapisz', array('class' => 'btn btn-success', 'name' => 'save')); ?>
+
+                            <?php echo Form::submit('Usuń', array('class' => 'btn btn-danger', 'name' => 'destroy')); ?>
+
+                        </div>
 
                     </div>
                 </div>
@@ -278,14 +284,12 @@
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <div class="col-sm-8 col-lg-offset-2">
                         <?php echo Form::submit('Uaktualnij nadrzędny element', array('class' => 'btn btn-primary', 'name' => 'update')); ?>
 
                     </div>
                 </div>
-
 
                 <?php echo Form::close(); ?>
 
@@ -306,9 +310,7 @@
                 <h4 class="modal-title">Zmień dane materiału</h4>
             </div>
             <div class="modal-body">
-                <?php echo Form::open(array('url' => '/material/update', 'method' => 'get', 'class' => 'form-horizontal')); ?>
-
-                <?php echo Form::open(array('url' => '/material/update', 'method' => 'get', 'class' => 'form-horizontal')); ?>
+                <?php echo Form::open(array('url' => '/material/action', 'method' => 'get', 'class' => 'form-horizontal')); ?>
 
 
                 <div class="form-group">
@@ -349,8 +351,12 @@
 
                 <div class="form-group">
                     <div class="col-sm-9 col-lg-offset-3">
-                        <?php echo Form::submit('Zapisz', array('class' => 'btn btn-primary')); ?>
+                        <div class="btn-group">
+                            <?php echo Form::submit('Zapisz', array('class' => 'btn btn-success', 'name' => 'save')); ?>
 
+                            <?php echo Form::submit('Usuń', array('class' => 'btn btn-danger', 'name' => 'destroy')); ?>
+
+                        </div>
                     </div>
                 </div>
 

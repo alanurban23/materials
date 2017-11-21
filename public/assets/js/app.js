@@ -1,5 +1,102 @@
 $(document).ready(function () {
     var state = false;
+    var sortASC = true;
+    const plus = "glyphicon-plus";
+    const minus = "glyphicon-minus";
+
+    $('.glyphicon-resize-full').on('click', function () {
+        var groupList = $('#group-list');
+        var spanExpand = groupList.find('ul > li').find('span.expand');
+
+        if (groupList.hasClass('roll-in')) {
+            groupList.find('ul > li > ul').removeClass('hidden');
+            groupList.addClass('roll-out').removeClass('roll-in');
+            spanExpand.removeClass(plus).addClass(minus);
+        }
+        else {
+            groupList.find('ul > li > ul').addClass('hidden');
+            groupList.removeClass('roll-out').addClass('roll-in');
+            spanExpand.removeClass(minus).addClass(plus);
+        }
+    });
+
+    $('.group .glyphicon-plus').on('click',function () {
+        var parent = $(this).parent('li');
+        var group = parent.find('ul > li');
+        var ul;
+        var firstSpan = parent.find('span').first();
+
+        if (group.length > 0) {
+            ul = group.parent('ul');
+            if (ul.first().hasClass('hidden')) {
+                ul.children().not('li > ul').parent('ul').removeClass('hidden');
+                ul.find('li').find('ul').addClass('hidden');
+                firstSpan.removeClass(plus).addClass(minus);
+            }
+            else {
+                ul.addClass('hidden');
+                firstSpan.removeClass(minus).addClass(plus);
+            }
+        }
+        else {
+            ul = parent.find('ul');
+            if (ul.hasClass('hidden')) {
+                ul.removeClass('hidden');
+                firstSpan.removeClass(plus).addClass(minus);
+            }
+            else {
+                ul.addClass('hidden');
+                firstSpan.removeClass(minus).addClass(plus);
+            }
+        }
+    });
+
+    $('.glyphicon-sort-by-alphabet').on('click', function() {
+        var group = [];
+
+        var parent = $(this).parent('li');
+        var parentChildren = parent.find('ul').children();
+        var hasParentChildren = parent.find('ul > li.group');
+
+        if (sortASC) {
+            if (hasParentChildren.length > 0) {
+                //console.log(parent.find('ul').first());
+                parentChildren = parent.find('ul').first().children();
+
+                parentChildren.sort(function(a,b){
+                    return a.dataset.name > b.dataset.name
+                }).appendTo(parent.find('ul').first());
+            }
+            else {
+                parentChildren.sort(function(a,b){
+                    return a.dataset.name > b.dataset.name
+                }).appendTo(parent.find('ul'));
+
+            }
+
+            parent.find('span').eq(1).removeClass('glyphicon-sort-by-alphabet-alt').addClass('glyphicon-sort-by-alphabet');
+            sortASC = false;
+        }
+        else {
+            if (hasParentChildren.length > 0) {
+                parentChildren = parent.find('ul').first().children();
+
+                parentChildren.sort(function(a,b){
+                    return a.dataset.name < b.dataset.name
+                }).appendTo(parent.find('ul').first());
+            }
+            else {
+                parentChildren.sort(function(a,b){
+                    return a.dataset.name < b.dataset.name
+                }).appendTo(parent.find('ul'));
+            }
+
+
+            parent.find('span').eq(1).removeClass('glyphicon-sort-by-alphabet').addClass('glyphicon-sort-by-alphabet-alt');
+            sortASC = true;
+        }
+
+    });
 
     $('#measures tr a').click('on', function () {
         var row = $(this).closest('tr');
@@ -22,9 +119,9 @@ $(document).ready(function () {
 
     //$('#group-list').find('ul').addClass('hide');  //rollin all subgroups
 
-    function setUpdatePath(modal, name) {
+    function setUpdatePath(modal, id) {
         var updateURL = modal.find('form').attr('action');      //find path
-        modal.find('form').attr('action', updateURL + '/' + name);  //set updated measures to the path route
+        modal.find('form').attr('action', updateURL + '/' + id);  //set updated measures to the path route
 
     }
 
@@ -32,7 +129,8 @@ $(document).ready(function () {
         var parent = $(this).closest('li');
         var name = $(this).text();
         var id = parent.attr('id');
-        var modal = $('#change-group-modal').find('#name').val(name);
+        var modal = $('#change-group-modal');
+        modal.find('#name').val(name);
 
         setUpdatePath(modal, id);
     });
@@ -55,6 +153,21 @@ $(document).ready(function () {
         modal.find('#group').val(material_group);
     });
 
+    $('.materials').on('click', 'li', function () {
+        var modal = $('#modal-update-material');
+        var name = $(this).text();
+        var measure = $(this).data('measure-id');
+        var code = $(this).data('code');
+        var material_group = $(this).data('material_group-id');
 
+        setUpdatePath(modal, code);
+
+        modal.find('#code').val(code);
+        modal.find('#name').val(name);
+        modal.find('#measure').val(measure);
+        modal.find('#group').val(material_group);
+
+        modal.modal('show');
+    });
 
 });

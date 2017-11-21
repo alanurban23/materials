@@ -18,6 +18,12 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>
     <script src="assets/js/app.js"></script>
+
+    <style>
+        ul>li {
+            list-style: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -52,14 +58,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($measures as $measure): ?>
+                        <?php $__currentLoopData = $measures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $measure): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo $measure->short_name; ?></td>
                                 <td><?php echo $measure->name; ?></td>
                                 <td><a href="#modal-id" data-toggle="modal" data-target="#modal-edit-measure"><span
                                                 class="glyphicon glyphicon-pencil"></span></a></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
@@ -76,7 +82,7 @@
                     </h3>
                 </div>
                 <div class="list-group" id="materials">
-                    <?php foreach($materials as $material): ?>
+                    <?php $__currentLoopData = $materials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $material): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <a href="#" class="list-group-item" data-toggle="modal" data-target="#modal-update-material">
                             <h4 class="list-group-item-heading">
                                 <strong><?php echo $material->name; ?> </strong>
@@ -84,11 +90,13 @@
                                 </small>
                             </h4>
                             <p class="list-group-item-text">
-                                <italic id="<?php echo $material->group->id; ?>"><?php echo $material->group->name; ?></italic>
-                                <em><?php echo $material->code; ?></em>
+                                <?php if(isset($material->group)): ?>
+                                    <italic id="<?php echo $material->group->id; ?>"><?php echo $material->group->name; ?></italic>
+                                <?php endif; ?>
+                                    <em><?php echo $material->code; ?></em>
                             </p>
                         </a>
-                    <?php endforeach; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
             </div>
         </div>
@@ -98,16 +106,17 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Grupy mteriałów
                         <a href="" data-toggle="modal" data-target="#modal-new-material-groups">
-                            <span class="glyphicon glyphicon-plus" style="float: right;"></span>
+                            <span class="glyphicon glyphicon-plus" style="float: right;" title="Dodaj grupę"></span>
                         </a>
+                        <span class="glyphicon glyphicon-resize-full" style="float: right; margin-right: 10px; cursor:pointer;" title="Rozwiń wszystko"></span>
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div id="group-list">
-                        <?php foreach($groups as $el): ?>
+                    <div id="group-list" class="roll-in">
+                        <?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $el): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php echo $el; ?>
 
-                        <?php endforeach; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Material;
 use App\MaterialGroups;
 use Illuminate\Http\Request;
 
@@ -73,7 +74,20 @@ class MaterialGroupController extends Controller
             Session::flash('message', 'Zaaktualizowano nazwę wybranej grupy materiałów');
             return redirect('/');
 
-        } else {
+        }
+        elseif (Input::get('destroy')) {
+            //delete group
+            MaterialGroups::destroy($old_group);
+            //delete group with subgroups
+            MaterialGroups::where('id_head_group', $old_group)->delete();
+            //delete leafs in subgroups
+            Material::where('material_groups_id', $old_group)->delete();
+            //MaterialGroups::destroy($old_group);
+
+            Session::flash('message', 'Usunięto węzeł');
+            return redirect('/');
+        }
+        else {
 
             $g0 = MaterialGroups::find($old_group);
             $g0->id_head_group = Input::get('group');
