@@ -6,15 +6,11 @@ Aplikacja do zarządzania grupami materiałów, jednostkami a także materiałam
 ### Instalacja i konfiguracja
 ---
 
-##### Pobranie i zainstalowanie biblioteki Composer
-[link do biblioteki composer](https://getcomposer.org/doc/00-intro.md#using-the-installer).
-
 ##### Konfiguracja bazy danych
-- Utworzenie nowej bazy danych o nazwie `materials` z domyślnymi uprawnieniami 
-- Uruchamiamy wiersz poleceń i przechodzimy do głównego katalogu z aplikacją ../materials/
+- Utworzenie nowej bazy danych o nazwie `materials`
+- Utowrzenie użytkownika materials:materials
 - Wydajemy polecenie `php artisan migrate`, aby utworzyć wszystkie tabele
 - Następnie polecenie `php artisan db:seed` aby pobrać już utworzone przykładowe dane
-- Aplikacja dostępna pod adresem `localhost/materials/public`
 
 ### Licencja
 ---
